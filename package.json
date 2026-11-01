@@ -1,0 +1,14 @@
+{
+  "name": "soup-tools-community",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The approved directory of community extensions for SOUP Tools",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "validate:offline": "node scripts/validate.mjs --offline",
+    "test": "node --test test/*.test.mjs"
+  }
+}

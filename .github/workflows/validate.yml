@@ -1,0 +1,40 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tests
+        run: npm test
+      - name: Get the list as it was before this change
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="origin/${{ github.base_ref }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          if git show "$base:extensions.json" > "$RUNNER_TEMP/base.json" 2>/dev/null; then
+            echo "BASE_FILE=$RUNNER_TEMP/base.json" >> "$GITHUB_ENV"
+          else
+            echo "No earlier list found; checking every entry."
+          fi
+      - name: Validate extensions.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          IS_PULL_REQUEST: ${{ github.event_name == 'pull_request' && 'true' || '' }}
+        run: npm run validate
