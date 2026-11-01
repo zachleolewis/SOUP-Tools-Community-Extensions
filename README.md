@@ -1,6 +1,6 @@
 # SOUP Tools Community
 
-The approved directory of community extensions for [SOUP Tools](https://github.com/zachleolewis/SoupScrimTracker).
+The approved directory of community extensions for [SOUP Tools](https://github.com/zachleolewis/SOUP-Tools-Releases).
 
 The directory is one file, [`extensions.json`](extensions.json). An extension is **listed** when a pull request adding its entry has been reviewed and merged. Modeled on Obsidian's `obsidian-releases`.
 

@@ -13,7 +13,8 @@ import { dirname, join, resolve } from "node:path";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const MAINTAINER = "zachleolewis";
 // Ids SOUP's built-in modules use (the manifest rules: "not the id of a built-in module"). Extend as modules are added.
-export const RESERVED_IDS = ["library", "riot-client"];
+// The ids of SOUP's built-in modules (SoupScrimTracker `app/src-tauri/src/modules/`); SOUP refuses a manifest that uses one.
+export const RESERVED_IDS = ["core", "riot-client", "replay-parser", "library", "extensions", "match-capture", "custom-games", "share", "view-in-client", "asset-patches", "replay-viewer-3d"];
 const SEMVER = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 const ID_RULE = "1 to 40 lowercase letters, digits and dashes, no leading or trailing dash, not starting with 'soup'";
 
